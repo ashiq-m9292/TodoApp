@@ -1,0 +1,14 @@
+export const DATA_REQUEST = "Data_Request";
+export const DATA_REQUEST_SUCCESS = "Data_Request_Success";
+export const DATA_CREATE_SUCCESS = "Data_Create_Success";
+export const DATA_UPDATE_SUCCESS = "Data_Update_Success";
+export const DATA_DELETE_SUCCESS = "Data_Delete_Success";
+export const DATA_REQUEST_FAILURE = "Data_Request_Failuer";
+export const TODO_REQUEST = "Todo_Request";
+export const TODO_REQUEST_SUCCESS = "Todo_Request_Success";
+export const TODO_CREATE_SUCCESS = "Todo_Create_Success";
+export const TODO_REQUEST_FAILURE = "Todo_Request_Failure";
+export const TODO_UPDATE_SUCCESS = "Todo_Update_Success";
+export const TODO_DELETE_SUCCESS =  "Todo_Delete_Success";
+export const TOGGLE_TODO = "Toggle_Todo";
+export const TOGGLE_THEME = "Toggle_Theme";
