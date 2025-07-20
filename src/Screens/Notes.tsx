@@ -4,7 +4,6 @@ import { SafeAreaView, StatusBar, StyleSheet, Platform, BackHandler } from 'reac
 import { useDispatch, useSelector } from 'react-redux';
 import { getNotesData } from '../Redux/Action';
 import Components from '../Components/AllComponents';
-import Share from 'react-native-share';
 import useThemeColors from '../Components/ThemeHandle';
 
 
@@ -50,22 +49,6 @@ const Notes = ({ navigation }: any) => {
     }
   }
 
-  // share functionality
-  const shareFunction = async (item: any) => {
-    try {
-      if (selectedItem.length === 0) {
-        return
-      }
-      const message = selectedItem.map((item: any) => `${item.title} \n ${item.description}`).join('\n\n.....\n\n')
-      await Share.open({
-        title: 'Share Notes',
-        message: message
-      })
-    } catch (error) {
-      console.warn("error in share function", error)
-    }
-  };
-
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: themeColors.background }]}>
@@ -86,6 +69,7 @@ const Notes = ({ navigation }: any) => {
         SelectAll="SelectAll"
         showSwitch={true}
       />
+
       {/* notes fetch Components  */}
       <Components.FetchNotesData
         noteData={data}
@@ -95,7 +79,6 @@ const Notes = ({ navigation }: any) => {
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
         loading={loading}
-
       />
 
       {/* notes create button  */}
@@ -105,16 +88,6 @@ const Notes = ({ navigation }: any) => {
         setSelectedMode={() => setSelectedMode(!selectedMode)}
       />
 
-      {/* notes bottom button  */}
-      {
-        selectedMode ?
-          <Components.BottomButton
-            selectedItem={selectedItem}
-            setSelectedMode={setSelectedMode}
-            shareFunction={shareFunction}
-          />
-          : null
-      }
     </SafeAreaView>
   );
 }

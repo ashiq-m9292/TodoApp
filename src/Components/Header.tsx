@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#DED3C4',
         width: '100%',
-        height: verticalScale(120),
+        height: verticalScale(100),
         justifyContent: 'flex-end',
         paddingLeft: scale(10),
         paddingRight: scale(4),

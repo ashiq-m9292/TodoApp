@@ -1,11 +1,13 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import MainStack from './MainStack';
+import { navigationRef } from '../Components/NavigationService';
 
 
 const Routes = () => {
+   
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             <MainStack />
         </NavigationContainer>
     );

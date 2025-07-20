@@ -5,7 +5,7 @@ export const light = {
     itemBackground: '#DCC5B2',
     textInputbackground: '#ffffff',
     iconColor: '#000000',
-    completedColor: '#0000000'
+    completedColor: '#0000000',
 };
 
 export const dark = {
@@ -13,5 +13,5 @@ export const dark = {
     textInputbackground: '#ffffff',
     text: '#FAF7F3',
     iconColor: '#ffffff',
-    completedColor: '#ffffff'
+    completedColor: '#ffffff',
 }

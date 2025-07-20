@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: verticalScale(51),
+        top: verticalScale(25),
         alignSelf: 'flex-end',
         right: scale(34)
     }

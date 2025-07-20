@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View, ActivityIndicator } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useDispatch } from 'react-redux';
+import { deleteNotesData } from '../Redux/Action';
+import { Share } from 'react-native';
+import useThemeColors from './ThemeHandle';
 
 const FetchNotesData = ({ navigation, noteData, selectedMode, setSelectedMode, selectedItem, setSelectedItem, loading }: any) => {
+  const dispatch = useDispatch<any>();
+  const [shareItem, setShareItem] = useState<any>(null);
+  const themeColors = useThemeColors();
+
+  // selected ids 
   const toggleSelctedNotes = (_id: any) => {
     if (selectedItem.includes(_id)) {
       setSelectedItem(selectedItem.filter((note: any) => note !== _id))
@@ -12,14 +22,27 @@ const FetchNotesData = ({ navigation, noteData, selectedMode, setSelectedMode, s
     }
   }
 
-  // loader 
-  // if (loading) {
-  //   return (
-  //     <ActivityIndicator color={"aqua"} size="large"
-  //       style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-  //     />
-  //   )
-  // }
+  // delete notes function 
+  const deleteNotesFunction = () => {
+    if (selectedItem.length === 0) {
+      return
+    } else {
+      dispatch(deleteNotesData(selectedItem))
+      setSelectedMode(false)
+    }
+  };
+
+  // share functionality
+  const shareFunction = async () => {
+    if (selectedItem.length === 0) {
+      return
+    } else {
+      const massage = `${shareItem.title}\n\n${shareItem.description}`;
+      await Share.share({
+        message: massage
+      })
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,13 +51,14 @@ const FetchNotesData = ({ navigation, noteData, selectedMode, setSelectedMode, s
           <ActivityIndicator color={"aqua"} size={"large"} style={{ marginTop: verticalScale(200) }} />
         ) : (
           <FlatList
-            ListFooterComponent={<View style={{ height: verticalScale(126) }}></View>}
+            ListFooterComponent={<View style={{ height: verticalScale(10) }}></View>}
             data={noteData}
             horizontal={false}
             renderItem={({ item }) => (
               <TouchableOpacity
                 onLongPress={() => {
                   setSelectedMode(true);
+                  setShareItem(item)
                 }}
                 onPress={() => navigation.navigate("DetailsScreen", item = { item })}
                 style={styles.itemContainer}>
@@ -50,6 +74,30 @@ const FetchNotesData = ({ navigation, noteData, selectedMode, setSelectedMode, s
           />
         )
       }
+      {
+        selectedMode ? (
+          <View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', alignSelf: 'center', gap: scale(100) }}>
+            <TouchableOpacity
+              onPress={shareFunction}
+            >
+              <Icon
+                name='share-social-outline'
+                color={themeColors.iconColor}
+                size={36}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={deleteNotesFunction}
+            >
+              <Icon
+                name='trash-outline'
+                color={themeColors.iconColor}
+                size={36}
+              />
+            </TouchableOpacity>
+          </View>
+        ) : null
+      }
     </SafeAreaView>
   );
 }
@@ -59,6 +107,7 @@ export default FetchNotesData;
 const styles = StyleSheet.create({
   container: {
     marginTop: verticalScale(12),
+    flex: 1
   },
   itemContainer: {
     backgroundColor: '#DCC5B2',
@@ -70,11 +119,11 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(10),
   },
   textOne: {
-    fontSize: moderateScale(30),
+    fontSize: moderateScale(26),
     color: '#3D74B6'
   },
   textTwo: {
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(16),
     color: '#3D74B6'
   },
 })

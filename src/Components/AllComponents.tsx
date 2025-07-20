@@ -1,4 +1,3 @@
-import BottomButton from "./BottomButton";
 import CreateButton from "./CreateButton";
 import EditModal from "./EditModal";
 import FetchNotesData from "./FetchNotesData";
@@ -15,7 +14,6 @@ const Components = {
     FetchNotesData: FetchNotesData,
     Header: Header,
     CreateButton: CreateButton,
-    BottomButton: BottomButton,
     FetchTodoData: FetchTodoData,
     TodoHeader: TodoHeader,
     TodoCreateButton: TodoCreateButton,

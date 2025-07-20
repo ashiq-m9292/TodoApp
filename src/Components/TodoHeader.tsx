@@ -17,7 +17,7 @@ const TodoHeader = ({ headerStyle, showTitle, title, todosLength, showRigthIcon,
                 {
                     showTitle ?
                         <View>
-                            <Text style={{ fontSize: moderateScale(34), fontWeight: 'bold' }}>{title}</Text>
+                            <Text style={{ fontSize: moderateScale(34),  fontWeight: 'bold', color: '#3D74B6' }}>{title}</Text>
                         </View>
                         : <TouchableOpacity>
                             <Icon name='arrow-back' size={30} color={'black'} onPress={() => navigation.goBack()} />
@@ -28,7 +28,7 @@ const TodoHeader = ({ headerStyle, showTitle, title, todosLength, showRigthIcon,
                 {
                     todoSelectedMode ? false
                         : <TouchableOpacity onPress={todoMoreIcon}>
-                            <Feather name='more-vertical' size={50} />
+                            <Feather name='more-vertical' size={40} />
                         </TouchableOpacity>
                 }
 
@@ -37,7 +37,7 @@ const TodoHeader = ({ headerStyle, showTitle, title, todosLength, showRigthIcon,
                 {
                     todoSelectedMode ?
                         <TouchableOpacity onPress={cancelOnpress}>
-                            <Text style={{ fontSize: moderateScale(26) }}>Cancel</Text>
+                            <Text style={{ fontSize: moderateScale(24),  fontWeight: 'bold', color: '#3D74B6' }}>Cancel</Text>
                         </TouchableOpacity>
                         : null
                 }
@@ -46,14 +46,14 @@ const TodoHeader = ({ headerStyle, showTitle, title, todosLength, showRigthIcon,
                 {
                     todoSelectedMode ?
                         <TouchableOpacity onPress={selectallOnpress}>
-                            <Text style={{ fontSize: moderateScale(26), paddingRight: 10 }}>Select All</Text>
+                            <Text style={{ fontSize: moderateScale(24), paddingRight: 10,  fontWeight: 'bold', color: '#3D74B6' }}>Select All</Text>
                         </TouchableOpacity>
                         : null
                 }
 
             </View>
             <View>
-                <Text style={{ fontSize: moderateScale(24), fontWeight: 'bold' }}>{todosLength}</Text>
+                <Text style={{ fontSize: moderateScale(24), fontWeight: 'bold',  color: '#3D74B6' }}>{todosLength}</Text>
             </View>
         </View>
     );
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#DED3C4',
         width: '100%',
-        height: verticalScale(120),
+        height: verticalScale(100),
         justifyContent: 'flex-end',
         paddingLeft: scale(10),
         paddingVertical: verticalScale(10),

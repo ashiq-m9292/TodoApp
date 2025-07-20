@@ -3,19 +3,19 @@ import { ToastAndroid } from "react-native";
 import { TODO_REQUEST, TOGGLE_TODO, TODO_REQUEST_SUCCESS, TODO_CREATE_SUCCESS, TODO_REQUEST_FAILURE, TODO_UPDATE_SUCCESS, TODO_DELETE_SUCCESS } from "./Constant";
 
 // create todo function
-export const createTodo = (todo: String, navigation:any) => async (dispatch: any) => {
+export const createTodo = (todoData: { todo: string, dueDate?: string }, navigation: any) => async (dispatch: any) => {
     dispatch({ type: TODO_REQUEST })
     try {
         let response = await fetch(`${TODOS_URL}/create`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ todo })
+            body: JSON.stringify(todoData)
         })
         let data = await response.json();
         if (response.ok) {
             dispatch({ type: TODO_CREATE_SUCCESS, payload: data })
             ToastAndroid.show("created Successfully", ToastAndroid.SHORT);
-             navigation.reset({
+            navigation.reset({
                 index: 0,
                 routes: [{
                     name: "BottomTab",
@@ -51,13 +51,13 @@ export const getTodoData = () => async (dispatch: any) => {
 
 // todo update function
 
-export const updateTodo = (id: String, todo: String, navigation: any) => async (dispatch: any) => {
+export const updateTodo = (id: String, todo: String, dueDate: any, navigation: any) => async (dispatch: any) => {
     dispatch({ type: TODO_REQUEST })
     try {
         let response = await fetch(`${TODOS_URL}/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ todo })
+            body: JSON.stringify({todo, dueDate})
         })
         let data = await response.json();
         if (response.ok) {

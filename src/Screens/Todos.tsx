@@ -32,7 +32,7 @@ const Todos = ({ navigation }: any) => {
 
   return (
     <View style={[styles.todoContainer, { backgroundColor: themeColors.background }]}>
-
+      <Components.StatusBarCom />
       {/* todo header */}
       <Components.TodoHeader
         showTitle={true}

@@ -10,7 +10,6 @@ import useThemeColors from '../Components/ThemeHandle';
 
 const CreateNote = ({ navigation }: any) => {
     const dispatch = useDispatch<any>();
-    const isCreatingRef = useRef(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const themeColors = useThemeColors();

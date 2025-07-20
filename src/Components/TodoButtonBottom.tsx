@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
 import { deleteNotes } from '../Redux/TodoAction';
+import useThemeColors from './ThemeHandle';
 
 
 const TodoButtonBottom = ({ setTodoEditModal, todoSelectedItem, setTodoSelectedMode }: any) => {
     const dispatch = useDispatch<any>();
+    const themeColors = useThemeColors();
 
     // todo delete function 
     const todoDeleteFunction = () => {
@@ -25,7 +27,7 @@ const TodoButtonBottom = ({ setTodoEditModal, todoSelectedItem, setTodoSelectedM
             >
                 <Icon
                     name='trash-outline'
-                    color={'black'}
+                    color={themeColors.iconColor}
                     size={36}
                 />
             </TouchableOpacity>
@@ -44,7 +46,6 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'yellow'
     },
 });
 

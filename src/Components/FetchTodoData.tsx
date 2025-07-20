@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import CheckBox from 'react-native-check-box';
@@ -14,7 +14,7 @@ const FetchTodoData = ({ navigation, todoSelectedItem, todoSelectedMode, setTodo
   const themeColors = useThemeColors();
 
   const todos = Array.isArray(raw) ? raw : Array.isArray(raw?.data) ? raw.data : [];
-  const  pendingTodo = todos.filter((todo: any) => !todo.completed)
+  const pendingTodo = todos.filter((todo: any) => !todo.completed)
   const completedTodo = todos.filter((todo: any) => todo.completed)
 
   // toggle selected functioinaliteis
@@ -32,6 +32,12 @@ const FetchTodoData = ({ navigation, todoSelectedItem, todoSelectedMode, setTodo
     await dispatch(getTodoData());
   };
 
+  // dueDate function 
+  const isDueDate = (dueDateString: string) => {
+    const now = new Date();
+    const dueDate = new Date(dueDateString);
+    return dueDate < now
+  }
 
   return (
     <View style={styles.container}>
@@ -51,6 +57,11 @@ const FetchTodoData = ({ navigation, todoSelectedItem, todoSelectedMode, setTodo
               }
               <TouchableOpacity style={{ width: '90%' }} onPress={() => navigation.navigate("TodoUpdateScreen", item = { item })} >
                 <Text style={styles.textOne}>{item.todo} </Text>
+                {
+                  item.dueDate ?
+                    <Text style={[styles.textTwo, { color: item.dueDate && isDueDate(item.dueDate) && 'red'  }]}>{ new Date(item.dueDate).toLocaleString()} </Text>
+                    : null
+                }
               </TouchableOpacity>
               {
                 todoSelectedMode ?
@@ -60,7 +71,11 @@ const FetchTodoData = ({ navigation, todoSelectedItem, todoSelectedMode, setTodo
             </TouchableOpacity>)
             : null
         }
-        <Text style={{ fontSize: moderateScale(26), fontWeight: 'bold', color: themeColors.completedColor, marginLeft: scale(10), paddingTop: verticalScale(6) }}>Completed</Text>
+      {
+        completedTodo.length ? (
+            <Text style={{ fontSize: moderateScale(26), fontWeight: 'bold', color: themeColors.completedColor, marginLeft: scale(10), paddingTop: verticalScale(6) }}>Completed</Text>
+        ) : null
+      }
         {
           completedTodo.length ?
             completedTodo.map((item: any) => <TouchableOpacity key={item._id} style={styles.itemContainerTwo}>
@@ -76,6 +91,11 @@ const FetchTodoData = ({ navigation, todoSelectedItem, todoSelectedMode, setTodo
               }
               <TouchableOpacity style={{ width: '90%' }} onPress={() => navigation.navigate("TodoUpdateScreen", item = { item })} >
                 <Text style={styles.textOne}>{item.todo} </Text>
+                {
+                  item.dueDate ?
+                    <Text style={[styles.textTwo, { color: item.dueDate && isDueDate(item.dueDate) && 'red'  }]}>{ new Date(item.dueDate).toLocaleString()}</Text>
+                    : null
+                }
               </TouchableOpacity>
               {
                 todoSelectedMode ?
@@ -113,6 +133,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textOne: {
-    fontSize: moderateScale(30)
+    fontSize: moderateScale(26),
+    color: '#3D74B6',
   },
+  textTwo: {
+    fontSize: moderateScale(18),
+    color: '#3D74B6'
+  }
 })
