@@ -48,9 +48,8 @@ const CreateTodo = ({ navigation }: any) => {
   // todo create date function
   const todoObject = {
     todo: todo,
-    // dueDate: date ? date.toISOString() : undefined
-    ...(date ? {dueDate: date.toISOString()} : {})
-  } 
+    ...(date ? { dueDate: date.toISOString() } : {})
+  }
   // todo handle save function
   const todoHandleSave = async () => {
     dispatch(createTodo(todoObject, navigation));
@@ -114,8 +113,8 @@ const CreateTodo = ({ navigation }: any) => {
               mode={mode}
               display='default'
               onChange={onChange}
-              is24Hour={true}
-              locale='en-In'
+              is24Hour={false}
+              locale='en-IN'
             />
             : null
         }

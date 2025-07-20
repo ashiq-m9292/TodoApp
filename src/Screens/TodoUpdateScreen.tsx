@@ -21,7 +21,6 @@ const TodoUpdateScreen = ({ navigation, route }: any) => {
 
     useEffect(() => {
         notifee.requestPermission();
-        console.warn("id check", id)
     }, []);
 
     // todo update function 
@@ -45,7 +44,9 @@ const TodoUpdateScreen = ({ navigation, route }: any) => {
                 type: TriggerType.TIMESTAMP
             }
         )
-        dispatch(updateTodo(item._id, todo, date.toISOString(), navigation));
+        const updateDate = date ? date.toISOString() : null;
+
+        dispatch(updateTodo(item._id, todo, updateDate, navigation));
     }
 
     // change value date time 
@@ -97,8 +98,8 @@ const TodoUpdateScreen = ({ navigation, route }: any) => {
                             mode={mode}
                             display='default'
                             onChange={onChange}
-                            is24Hour={true}
-                            locale='en-In'
+                            is24Hour={false}
+                            locale='en-IN'
                         />
                         : null
                 }
