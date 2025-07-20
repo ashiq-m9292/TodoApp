@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: verticalScale(25),
+        top: verticalScale(30),
         alignSelf: 'flex-end',
-        right: scale(34)
+        right: scale(34),
     }
 })
